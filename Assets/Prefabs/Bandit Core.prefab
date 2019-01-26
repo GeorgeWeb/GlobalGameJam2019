@@ -91,7 +91,9 @@ GameObject:
   - component: {fileID: 7401595448292908890}
   - component: {fileID: 7401595448292908891}
   - component: {fileID: 7401595448292908892}
-  m_Layer: 8
+  - component: {fileID: 320728204104945046}
+  - component: {fileID: 1320117284}
+  m_Layer: 10
   m_Name: Bandit Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,3 +174,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.491268, y: 9.614632}
   m_EdgeRadius: 0
+--- !u!114 &320728204104945046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401595448292908893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1b137cb0805183b9f30b2575bcf0ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1
+  timeBetweenAttacks: 1.5
+  player: {fileID: 0}
+  attackTimer: 0
+--- !u!114 &1320117284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401595448292908893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085d68bffd4e99b45a7f96b7abcb3e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
