@@ -8,23 +8,35 @@ public class Spawning : MonoBehaviour
     [SerializeField] float minSpawnDelay = 1.0f;
     [SerializeField] float maxSpawnDelay = 5.0f;
     [SerializeField] Enemy enemyPrefab;
-    bool spawn = true;
+    [SerializeField] int maxAttackers = 2;
+    public GameObject spawningObject;
+
+    int attackersSpawned = 0;
     // Use this for initialization
-    IEnumerator Start()
+    public void StartSpawning()
     {
-        transform.SetPositionAndRotation(new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        while (spawn)
-        {
-            yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
-            SpawnAttacker();
-        }
+       
+        InvokeRepeating("SpawnAttacker", Random.Range(minSpawnDelay, maxSpawnDelay), Random.Range(minSpawnDelay, maxSpawnDelay));
     }
+
+    public void setSpawningObject (GameObject obj)
+    {
+        spawningObject = obj;
+    }
+
     private void SpawnAttacker()
     {
-        Enemy newAttacker = Instantiate(enemyPrefab, transform.position, transform.rotation) as Enemy;
-        newAttacker.transform.parent = transform;
-
+        if (attackersSpawned < maxAttackers)
+        {
+            spawningObject.GetComponent<Animator>().SetBool("Shake",  true);
+             
+            Enemy newAttacker = Instantiate(enemyPrefab, spawningObject.transform.position, transform.rotation) as Enemy;
+            newAttacker.transform.parent = spawningObject.transform;
+            attackersSpawned++;
+        }
     }
+   
+
     // Update is called once per frame
     void Update()
     {
