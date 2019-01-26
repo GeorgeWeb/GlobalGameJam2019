@@ -9,7 +9,7 @@ public class Tree : MonoBehaviour
     void Start()
     {
         int treeIndex =((int) Random.Range(0.0f, 100.0f)) % allTreeSprites.Count;
-        gameObject.GetComponentInChildren<SpriteRenderer>().sprite = allTreeSprites[treeIndex];
+        gameObject.GetComponentInChildren<Trunk>().gameObject.GetComponent<SpriteRenderer>().sprite = allTreeSprites[treeIndex];
     }
 
     // Update is called once per frame
