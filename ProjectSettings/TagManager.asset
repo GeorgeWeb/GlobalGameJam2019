@@ -44,6 +44,15 @@ TagManager:
   - name: Background
     uniqueID: 2842703771
     locked: 0
+  - name: Ground
+    uniqueID: 2876576177
+    locked: 0
+  - name: InteractiveEnvironment
+    uniqueID: 3916267437
+    locked: 0
   - name: Character
+    uniqueID: 3226719479
+    locked: 0
+  - name: Foreground
     uniqueID: 2127472993
     locked: 0

@@ -20,6 +20,8 @@ public class GameTree : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerObj = Object.FindObjectOfType<Player>().gameObject;
+
         generateTrunk();
         generateCrowns();
     }
@@ -71,7 +73,7 @@ public class GameTree : MonoBehaviour
 
     private void spawnRope()
     {
-        Debug.Log("Rope spawned");
+        // Debug.Log("Rope spawned");
         //ropeSpawned = true;
         rope = Instantiate(ropePrefab, crownWithSpawner.transform.position, transform.rotation);
         gameObject.GetComponent<Spawning>().StartSpawning();

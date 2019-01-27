@@ -9,8 +9,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     float timeBetweenAttacks = 0.3f;
 
-    public GameObject enemy;
-    EnemyHealth enemyHealth;
     PlayerHealth playerHealth;
 
     bool enemyInRange; // use 2D collider trigger enter/exit
@@ -20,13 +18,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     Animator animator;
 
-    bool attack = false;
+    List<GameObject> enemies = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         // Setting up the references
-        enemyHealth = enemy.GetComponent<EnemyHealth>();
         playerHealth = GetComponent<PlayerHealth>();
 
         if (animator == null)
@@ -38,6 +35,8 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // enemies = Object.FindObjectsOfType<Enemy>();
+
         // Add the time since Update was last called to the timer.
         attackTimer += Time.deltaTime;
 
@@ -45,47 +44,49 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKey(KeyCode.X))
         {
             animator.SetBool("IsAttacking", true);
-            attack = true;
         }
         else
         {
             animator.SetBool("IsAttacking", false);
         }
-
-        if (attack)
-        {
-            if (attackTimer >= timeBetweenAttacks && enemyInRange && playerHealth.currentHealth > 0)
-            {
-                Attack();
-            }
-            attack = false;
-        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Started collision with enemy!");
-        // the player is in range.
-        enemyInRange = true;
+        if (other.gameObject.layer == LayerMask.NameToLayer("EnemyMirror"))
+        {
+            // the player is in range.
+            enemyInRange = true;
+            var enemyObject = other.gameObject.GetComponentInParent<Enemy>().gameObject;
+            enemies.Add(enemyObject);
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("Ended collision with enemy!");
-        // the player is no longer in range.
-        enemyInRange = false;
+        if (other.gameObject.layer == LayerMask.NameToLayer("EnemyMirror"))
+        {
+            // the player is no longer in range.
+            enemyInRange = false;
+            var enemyObject = other.gameObject.GetComponentInParent<Enemy>().gameObject;
+            enemies.Remove(enemyObject);
+        }
     }
 
-    void Attack()
+    public void Attack()
     {
         // Reset the timer.
         attackTimer = 0f;
 
-        // If the player has health to lose
-        if (enemyHealth.currentHealth > 0)
+        foreach (var enemy in enemies)
         {
-            // damage the player.
-            enemyHealth.TakeDamage(attackDamage);
+            var enemyHealth = enemy.GetComponent<EnemyHealth>();
+            // If the player has health to lose
+            if (enemyHealth.currentHealth > 0)
+            {
+                // damage the player.
+                enemyHealth.TakeDamage(attackDamage);
+            }
         }
 
         Debug.Log("Attacking...");

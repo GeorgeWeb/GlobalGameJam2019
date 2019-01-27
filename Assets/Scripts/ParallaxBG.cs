@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ParallaxBG : MonoBehaviour
 {
+    [SerializeField]
     float speedDampening = 0.005f;
 
     [SerializeField]

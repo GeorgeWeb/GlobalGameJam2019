@@ -9,7 +9,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private float timeBetweenAttacks = 1.5f;
 
-    public GameObject player;
+    GameObject player;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
 
@@ -20,6 +20,7 @@ public class EnemyAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = Object.FindObjectOfType<Player>().gameObject;
         // Setting up the references
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -39,15 +40,18 @@ public class EnemyAttack : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Started collision with player!");
-        // the player is in range.
-        playerInRange = true;
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerMirror"))
+        {
+            Debug.Log("Started collision with player!");
+            // the player is in range.
+            playerInRange = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         // If the exiting collider is the player
-        if (other.gameObject == player)
+        if (other.gameObject.layer == LayerMask.NameToLayer("PlayerMirror"))
         {
             Debug.Log("Ended collision with player!");
             // the player is no longer in range.

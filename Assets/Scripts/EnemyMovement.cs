@@ -29,18 +29,18 @@ public class EnemyMovement : MonoBehaviour
         if (!isFalling)
         {
             Vector2 playerPosition = (Vector2)playerObj.GetComponent<Transform>().position;
-            Debug.Log(playerPosition.x - transform.position.x);
+            // Debug.Log(playerPosition.x - transform.position.x);
             if (playerPosition.x - transform.position.x >= positionRange )
             {
 
-                    Debug.Log("YES");
+                // Debug.Log("YES");
                 transform.localScale = Vector3.left + Vector3.up;
                 transform.Translate(Vector3.right * Time.deltaTime * speed);
 
             }   
             else if (playerPosition.x - transform.position.x <= -positionRange)
             {
-                  Debug.Log("NO");
+                // Debug.Log("NO");
                 transform.localScale = Vector3.right + Vector3.up;
                 transform.Translate(Vector3.left * Time.deltaTime * speed);
             }
@@ -53,11 +53,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D otherCollision)
     {
-        Debug.Log("Collided with " + otherCollision.gameObject);
+        // Debug.Log("Collided with " + otherCollision.gameObject);
         if (otherCollision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Debug.Log("Collided with " + otherCollision.gameObject);
-
+            // Debug.Log("Collided with " + otherCollision.gameObject);
             isFalling = false;
         }
     }
