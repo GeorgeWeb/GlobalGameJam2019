@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
+        SceneManager.LoadScene(1);
         // Destroy(gameObject);
     }
 }
