@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a2775f24a1f1603b76bd6be9730a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedDampening: 0.02
   sortingLayerName: Foreground
   sortingOrder: 0
   meshRenderer: {fileID: 3057099489450928107}
@@ -341,6 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a2775f24a1f1603b76bd6be9730a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedDampening: 0.0025
   sortingLayerName: Background
   sortingOrder: 1
   meshRenderer: {fileID: 3057099489476730250}
@@ -435,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a2775f24a1f1603b76bd6be9730a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedDampening: 0.01075
   sortingLayerName: Ground
   sortingOrder: 0
   meshRenderer: {fileID: 3057099490096964369}

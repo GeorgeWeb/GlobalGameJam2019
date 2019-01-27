@@ -5,36 +5,36 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    private int attackDamage = 1;
-    [SerializeField]
-    private float timeBetweenAttacks = 1.5f;
+    int attackDamage = 1;
 
     GameObject player;
-    PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
+    PlayerHealth playerHealth;
 
     bool playerInRange; // use 2D collider trigger enter/exit
 
-    public float attackTimer;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         player = Object.FindObjectOfType<Player>().gameObject;
         // Setting up the references
-        playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
+        playerHealth = player.GetComponent<PlayerHealth>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Add the time since Update was last called to the timer.
-        attackTimer += Time.deltaTime;
-
-        if (attackTimer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+        if (playerInRange)
         {
-            Attack();
+            animator.SetBool("IsAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("IsAttacking", false);
         }
     }
 
@@ -61,14 +61,14 @@ public class EnemyAttack : MonoBehaviour
 
     void Attack()
     {
-        // Reset the timer.
-        attackTimer = 0f;
-
-        // If the player has health to lose
-        if (playerHealth.currentHealth > 0)
+        if (playerInRange)
         {
-            // damage the player.
-            playerHealth.TakeDamage(attackDamage);
+            // If the player has health to lose
+            if (playerHealth.currentHealth > 0)
+            {
+                // damage the player.
+                playerHealth.TakeDamage(attackDamage);
+            }
         }
     }
 }

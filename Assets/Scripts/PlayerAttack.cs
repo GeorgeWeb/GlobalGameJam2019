@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     int attackDamage = 1;
     [SerializeField]
-    float timeBetweenAttacks = 0.3f;
+    float timeBetweenAttacks = 1.0f;
 
     PlayerHealth playerHealth;
 
@@ -35,19 +35,15 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // enemies = Object.FindObjectsOfType<Enemy>();
-
         // Add the time since Update was last called to the timer.
         attackTimer += Time.deltaTime;
-
-        // manage attack input
-        if (Input.GetKey(KeyCode.X))
+        if (attackTimer >= timeBetweenAttacks)
         {
-            animator.SetBool("IsAttacking", true);
-        }
-        else
-        {
-            animator.SetBool("IsAttacking", false);
+            // manage attack input
+            if (Input.GetKey(KeyCode.X))
+            {
+                animator.SetBool("IsAttacking", true);
+            }
         }
     }
 
@@ -89,6 +85,6 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        Debug.Log("Attacking...");
+        animator.SetBool("IsAttacking", false);
     }
 }
