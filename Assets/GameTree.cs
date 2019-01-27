@@ -8,6 +8,8 @@ public class GameTree : MonoBehaviour
     [SerializeField] List<Sprite> allTreeSprites;
     [SerializeField] List<Sprite> allCrownSprites;
     GameObject crownWithSpawner;
+    [SerializeField] float ropeSpawnRange = 5.0f;
+    [SerializeField] GameObject playerObj;
 
     // Rope spawning
     [SerializeField] GameObject ropePrefab;
@@ -52,7 +54,7 @@ public class GameTree : MonoBehaviour
             {
                 crownWithSpawner = Crown.gameObject;
                 gameObject.GetComponent<Spawning>().setSpawningObject(crownWithSpawner);
-                spawnRope();
+              //  spawnRope();
             }
             i++;
         }
@@ -70,7 +72,7 @@ public class GameTree : MonoBehaviour
     private void spawnRope()
     {
         Debug.Log("Rope spawned");
-        ropeSpawned = true;
+        //ropeSpawned = true;
         rope = Instantiate(ropePrefab, crownWithSpawner.transform.position, transform.rotation);
         gameObject.GetComponent<Spawning>().StartSpawning();
 
@@ -80,6 +82,10 @@ public class GameTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Mathf.Abs(playerObj.transform.position.x - gameObject.transform.position.x) < ropeSpawnRange && !ropeSpawned)
+        {
+            ropeSpawned = true;
+            spawnRope();
+        }
     }
 }

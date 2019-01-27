@@ -16,7 +16,7 @@ public class Spawning : MonoBehaviour
     public void StartSpawning()
     {
        
-        InvokeRepeating("SpawnAttacker", Random.Range(minSpawnDelay, maxSpawnDelay), Random.Range(minSpawnDelay, maxSpawnDelay));
+        InvokeRepeating("SpawnAttacker", 0.0f, Random.Range(minSpawnDelay, maxSpawnDelay));
     }
 
     public void setSpawningObject (GameObject obj)
@@ -28,8 +28,7 @@ public class Spawning : MonoBehaviour
     {
         if (attackersSpawned < maxAttackers)
         {
-            spawningObject.GetComponent<Animator>().SetBool("Shake",  true);
-             
+            spawningObject.GetComponent<Animator>().SetBool("Shake",  true);    
             Enemy newAttacker = Instantiate(enemyPrefab, spawningObject.transform.position, transform.rotation) as Enemy;
             newAttacker.transform.parent = spawningObject.transform;
             attackersSpawned++;
