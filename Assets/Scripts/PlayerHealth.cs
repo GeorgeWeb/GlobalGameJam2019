@@ -10,27 +10,16 @@ public class PlayerHealth : MonoBehaviour
     public Image healthContent;
 
     public Image damageImage;
-    public float flashSpeed = 5f;
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    public float flashSpeed = 5.0f;
+    public Color flashColour = new Color(1.0f, 0.0f, 0.0f, 0.1f);
 
-    // public AudioClip deathClip;
-
-    private bool isDamaged;
-    private bool isDead;
+    bool isDamaged = false;
+    bool isDead = false;
 
     void Awake()
     {
-        // Setting up the references.
-        // ...
-
         // Set the initial health of
         currentHealth = maximumHealth;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Empty.
     }
 
     // Update is called once per frame
@@ -61,6 +50,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Reduce the current health by the damage amount.
         currentHealth -= ammount;
+        Debug.Log("Player Health: " + currentHealth.ToString());
 
         // Set the health bar's value to the current health.
         float healthFillAmmountDecrease = 1.0f / maximumHealth;
@@ -73,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0 && !isDead)
         {
             Death();
+            Debug.Log("Player Died!");
         }
     }
 
@@ -80,12 +71,6 @@ public class PlayerHealth : MonoBehaviour
     {
         // Set the death flag so this function won't be called again.
         isDead = true;
-
-        // Tell the animator that the player is dead.
-        // ...
-
-        // Set the audiosource to play the death clip and play it.
-        // this will stop the hurt sound from playing as well.
-        // ...
+        // Destroy(gameObject);
     }
 }

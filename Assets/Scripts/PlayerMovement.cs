@@ -6,14 +6,15 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
 
-    [SerializeField]
-    float runSpeed = 50.0f;
+    public float runSpeed = 50.0f;
+
     float horizontalMove = 0.0f;
     bool grounded = true;
     bool jump = false;
     bool crouch = false; // not in-use
 
-    public Animator animator;
+    [SerializeField]
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +23,17 @@ public class PlayerMovement : MonoBehaviour
         {
             controller = GetComponent<CharacterController2D>();
         }
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // manage horizontal movement input
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));

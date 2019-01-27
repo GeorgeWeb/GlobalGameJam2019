@@ -30,19 +30,20 @@ public class ParallaxBG : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        var velocityX = player.GetComponent<Rigidbody2D>().velocity.x;
+        // if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (velocityX > 0)
         {
-            var scrollX = Time.deltaTime * 40.0f * speedDampening;
+            var scrollX = Time.deltaTime * player.GetComponent<PlayerMovement>().runSpeed * speedDampening;
             offset += new Vector2(scrollX, 0);
             meshRenderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
-            Debug.Log("Positive");
         }
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        // if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (velocityX < 0)
         {
-            var scrollX = Time.deltaTime * 40.0f * speedDampening;
+            var scrollX = Time.deltaTime * player.GetComponent<PlayerMovement>().runSpeed * speedDampening;
             offset -= new Vector2(scrollX, 0);
             meshRenderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
-            Debug.Log("Negative");
         }
     }
 }

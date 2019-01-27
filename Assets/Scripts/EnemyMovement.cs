@@ -43,7 +43,6 @@ public class EnemyMovement : MonoBehaviour
                   Debug.Log("NO");
                 transform.localScale = Vector3.right + Vector3.up;
                 transform.Translate(Vector3.left * Time.deltaTime * speed);
-
             }
         }
 

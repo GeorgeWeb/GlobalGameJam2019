@@ -11,6 +11,8 @@ public class EnemyAttack : MonoBehaviour
 
     public GameObject player;
     PlayerHealth playerHealth;
+    EnemyHealth enemyHealth;
+
     bool playerInRange; // use 2D collider trigger enter/exit
 
     public float attackTimer;
@@ -20,6 +22,7 @@ public class EnemyAttack : MonoBehaviour
     {
         // Setting up the references
         playerHealth = player.GetComponent<PlayerHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     // Update is called once per frame
@@ -28,17 +31,9 @@ public class EnemyAttack : MonoBehaviour
         // Add the time since Update was last called to the timer.
         attackTimer += Time.deltaTime;
 
-        if (attackTimer >= timeBetweenAttacks && playerInRange/* && enemyHealth.currentHealth > 0*/)
+        if (attackTimer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
         {
             Attack();
-            // playerInRange = false;
-        }
-
-        // If the player has zero or less health
-        if (playerHealth.currentHealth <= 0)
-        {
-            // alert player is dead.
-            Debug.Log("Player is dead!");
         }
     }
 

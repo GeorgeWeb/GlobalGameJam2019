@@ -8,7 +8,10 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        var newX = target.GetComponent<Transform>().position.x;
+        var newY = GetComponent<Transform>().position.y;
+        var newZ = GetComponent<Transform>().position.z;
         // update the camera position
-        GetComponent<Transform>().position = new Vector3(target.GetComponent<Transform>().position.x, GetComponent<Transform>().position.y, GetComponent<Transform>().position.z);
+        GetComponent<Transform>().position = new Vector3(newX, newY, newZ);
     }
 }
