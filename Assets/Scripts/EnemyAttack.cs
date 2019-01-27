@@ -5,15 +5,15 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    private int attackDamage = 1;
+    int attackDamage = 1;
     [SerializeField]
-    private float timeBetweenAttacks = 1.5f;
+    float timeBetweenAttacks = 1.5f;
 
     public GameObject player;
     PlayerHealth playerHealth;
     bool playerInRange; // use 2D collider trigger enter/exit
 
-    public float attackTimer;
+    float attackTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +31,13 @@ public class EnemyAttack : MonoBehaviour
         if (attackTimer >= timeBetweenAttacks && playerInRange/* && enemyHealth.currentHealth > 0*/)
         {
             Attack();
-            // playerInRange = false;
         }
 
         // If the player has zero or less health
         if (playerHealth.currentHealth <= 0)
         {
             // alert player is dead.
-            Debug.Log("Player is dead!");
+            // Debug.Log("Player is dead!");
         }
     }
 
@@ -51,13 +50,9 @@ public class EnemyAttack : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        // If the exiting collider is the player
-        if (other.gameObject == player)
-        {
-            Debug.Log("Ended collision with player!");
-            // the player is no longer in range.
-            playerInRange = false;
-        }
+        Debug.Log("Ended collision with player!");
+        // the player is no longer in range.
+        playerInRange = false;
     }
 
     void Attack()
